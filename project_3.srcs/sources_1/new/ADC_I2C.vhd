@@ -6,7 +6,7 @@ entity pcf8591_controller is
     generic (
         CLK_FREQ        : integer := 50_000_000;  -- System clock frequency (Hz)
         I2C_FREQ        : integer := 100_000;     -- I2C clock frequency (Hz)
-        DEVICE_ADDR     : std_logic_vector(6 downto 0) := "1001000" -- PCF8591 address (0x48)
+        DEVICE_ADDR     : std_logic_vector(6 downto 0) := "0100111" -- PCF8591 address (0x27)
     );
     port (
         -- System signals
