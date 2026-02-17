@@ -100,7 +100,7 @@ set_property -dict { PACKAGE_PIN R17   IOSTANDARD LVCMOS33 } [get_ports { ADC_SC
 set_property -dict { PACKAGE_PIN N18   IOSTANDARD LVCMOS33 } [get_ports { LCD_SDA }]; #IO_L13P_T2_MRCC_34 Sch=ck_io[8]
 set_property -dict { PACKAGE_PIN M18   IOSTANDARD LVCMOS33 } [get_ports { LCD_SCL }]; #IO_L8N_T1_AD10N_35 Sch=ck_io[9]
 #set_property -dict { PACKAGE_PIN U15   IOSTANDARD LVCMOS33 } [get_ports { ck_io10 }]; #IO_L11N_T1_SRCC_34 Sch=ck_io[10]
-set_property -dict { PACKAGE_PIN K18   IOSTANDARD LVCMOS33 } [get_ports { Waveform_gen }]; #IO_L12N_T1_MRCC_35 Sch=ck_io[11]
+set_property -dict { PACKAGE_PIN K18   IOSTANDARD LVCMOS33 } [get_ports { waveform_gen }]; #IO_L12N_T1_MRCC_35 Sch=ck_io[11]
 set_property -dict { PACKAGE_PIN J18   IOSTANDARD LVCMOS33 } [get_ports { lowpass }]; #IO_L14P_T2_AD4P_SRCC_35 Sch=ck_io[12]
 #set_property -dict { PACKAGE_PIN G15   IOSTANDARD LVCMOS33 } [get_ports { ck_io13 }]; #IO_L19N_T3_VREF_35 Sch=ck_io[13]
 
