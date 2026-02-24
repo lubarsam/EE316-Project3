@@ -9,8 +9,8 @@ entity Top_Level is
 		btn					: in std_logic_vector (3 downto 0);
 		LCD_SDA				: inout std_logic;
 		LCD_SCL				: inout std_logic;
-		oADCSDA				: inout std_logic;
-		oADCSCL				: inout std_logic;
+		ADC_SDA				: inout std_logic;
+		ADC_SCL				: inout std_logic;
 		waveform_gen		: in std_logic;
 		lowpass_in			: in std_logic;
 		lowpass_o			: out std_logic
@@ -96,8 +96,8 @@ inst_adc_i2c : ADC_I2C_user_logic
 	ChannelSel			=> ADCChannelSel,
 	EightBitDataFromADC	=> EightBitDataFromADC,
 	dataready			=> dataready,
-	oADCSDA				=> oADCSDA,
-	oADCSCL				=> oADCSCL
+	oADCSDA				=> ADC_SDA,
+	oADCSCL				=> ADC_SCL
 	);
 
 inst_lcd_i2c : I2C_LCD_Controller
