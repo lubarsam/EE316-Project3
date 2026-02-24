@@ -2,16 +2,16 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity clock_generator is
+entity N_Maker is
     Port (
         clk     : in  STD_LOGIC; -- 125 MHz
         reset   : in  STD_LOGIC;
         ADC_in  : in  STD_LOGIC_VECTOR(7 downto 0);  -- 0 to 255
         N_out   : out STD_LOGIC_VECTOR(17 downto 0)  -- 41666 to 125000
     );
-end clock_generator;
+end N_Maker;
 
-architecture Behavioral of clock_generator is
+architecture Behavioral of N_Maker is
 
     -- CHANGED: counter is now unsigned so we can do math on it
     signal counter   : unsigned(17 downto 0); 

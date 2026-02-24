@@ -33,6 +33,38 @@ component ADC_I2C_user_logic is							-- Modified from SPI usr logic from last y
 			  );
 end component;
 
+component clock_generator is
+    Port (
+        clk         : in  STD_LOGIC; -- 125 MHz
+        reset       : in  STD_LOGIC;
+        N           : in  STD_LOGIC_VECTOR(17 downto 0);
+        clk_out     : out STD_LOGIC
+         
+    );
+end component;
+
+component N_Maker is
+    Port (
+        clk     : in  STD_LOGIC; -- 125 MHz
+        reset   : in  STD_LOGIC;
+        ADC_in  : in  STD_LOGIC_VECTOR(7 downto 0);  -- 0 to 255
+        N_out   : out STD_LOGIC_VECTOR(17 downto 0)  -- 41666 to 125000
+    );
+end component;
+
+component pwm_gen is
+   generic(
+      N  : integer := 8;    -- Resolution (8-bit)
+      N2 : integer := 255   -- Max counter value (2^8 - 1)
+   );
+   port(
+      clk       : in std_logic;
+      reset     : in std_logic;
+      freq_in    : in std_logic_vector(7 downto 0); 
+      pwm_out   : out std_logic
+   );
+end component;
+
 -- ADC signals
 signal ADCChannelSel		: std_logic_vector (1 downto 0);
 signal EightBitDataFromADC	: std_logic_vector (7 downto 0);
@@ -46,6 +78,9 @@ signal clockActive			: std_logic;
 signal LCD_SDA				: std_logic;
 signal LCD_SCL				: std_logic;
 
+-- clock gen signals
+signal N					: std_logic_vector (17 downto 0);
+signal clk_out				: std_logic;
 begin
 
 inst_adc_i2c : ADC_I2C_user_logic
@@ -68,4 +103,26 @@ inst_lcd_i2c : I2C_LCD_Controller
 	LCD_SCL				=> LCD_SCL
 	);
 
+inst_clock_gen : clock_generator
+	port map (
+	clk					=> iClk,
+	reset				=> iReset,
+	N					=> N,
+	clk_out				=> clk_out
+	);
+
+inst_N_Maker : N_Maker
+	port map (
+	clk					=> iClk,
+	reset				=> iReset,
+	ADC_in				=> EightBitDataFromADC,
+	N_out				=> N
+	);
+	
+inst_pwm_gen : pwm_gen
+	port map (
+	clk					=> clk_out,
+	reset				=> iReset,
+	freq_in				=> open,
+	pwm_out				=> open
 end Structural;
