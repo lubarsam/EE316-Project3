@@ -4,7 +4,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity Top_Level is
         port (
 		iReset				: in std_logic; 
-		iClk				: in std_logic
+		iClk				: in std_logic;
+		clk_out					: out std_logic
         );
 end Top_Level;
 
@@ -79,8 +80,7 @@ signal LCD_SDA				: std_logic;
 signal LCD_SCL				: std_logic;
 
 -- clock gen signals
-signal N					: std_logic_vector (17 downto 0);
-signal clk_out				: std_logic;
+signal N_out					: std_logic_vector (17 downto 0);
 begin
 
 inst_adc_i2c : ADC_I2C_user_logic
@@ -107,7 +107,7 @@ inst_clock_gen : clock_generator
 	port map (
 	clk					=> iClk,
 	reset				=> iReset,
-	N					=> N,
+	N					=> N_out,
 	clk_out				=> clk_out
 	);
 
@@ -116,7 +116,7 @@ inst_N_Maker : N_Maker
 	clk					=> iClk,
 	reset				=> iReset,
 	ADC_in				=> EightBitDataFromADC,
-	N_out				=> N
+	N_out				=> N_out
 	);
 	
 inst_pwm_gen : pwm_gen
@@ -125,4 +125,5 @@ inst_pwm_gen : pwm_gen
 	reset				=> iReset,
 	freq_in				=> open,
 	pwm_out				=> open
+	);
 end Structural;
