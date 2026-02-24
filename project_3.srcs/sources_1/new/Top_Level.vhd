@@ -5,7 +5,16 @@ entity Top_Level is
         port (
 		iReset				: in std_logic; 
 		iClk				: in std_logic;
-		clk_out					: out std_logic
+		clk_out				: out std_logic;
+		btn					: in std_logic_vector (3 downto 0);
+		LCD_SDA				: inout std_logic;
+		LCD_SCL				: inout std_logic;
+		oADCSDA				: inout std_logic;
+		oADCSCL				: inout std_logic;
+		waveform_gen		: in std_logic;
+		lowpass_in			: in std_logic;
+		lowpass_o			: out std_logic
+
         );
 end Top_Level;
 
@@ -70,14 +79,12 @@ end component;
 signal ADCChannelSel		: std_logic_vector (1 downto 0);
 signal EightBitDataFromADC	: std_logic_vector (7 downto 0);
 signal dataready			: std_logic;
-signal oADCSDA				: std_logic;
-signal oADCSCL				: std_logic;
+
 
 -- LCD signals
 signal SourceSel			: std_logic_vector (1 downto 0);
 signal clockActive			: std_logic;
-signal LCD_SDA				: std_logic;
-signal LCD_SCL				: std_logic;
+
 
 -- clock gen signals
 signal N_out					: std_logic_vector (17 downto 0);
@@ -119,11 +126,11 @@ inst_N_Maker : N_Maker
 	N_out				=> N_out
 	);
 	
-inst_pwm_gen : pwm_gen
-	port map (
-	clk					=> clk_out,
-	reset				=> iReset,
-	freq_in				=> open,
-	pwm_out				=> open
-	);
+--inst_pwm_gen : pwm_gen
+--	port map (
+--	clk					=> clk_out,
+--	reset				=> iReset,
+--	freq_in				=> open,
+--	pwm_out				=> open
+--	);
 end Structural;
