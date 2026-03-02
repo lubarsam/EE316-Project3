@@ -76,7 +76,6 @@ component pwm_gen is
 end component;
 
 -- ADC signals
-signal ADCChannelSel		: std_logic_vector (1 downto 0);
 signal EightBitDataFromADC	: std_logic_vector (7 downto 0);
 signal dataready			: std_logic;
 
@@ -93,7 +92,7 @@ begin
 inst_adc_i2c : ADC_I2C_user_logic
 	port map(
 	iclk				=> iClk,
-	ChannelSel			=> ADCChannelSel,
+	ChannelSel			=> btn,
 	EightBitDataFromADC	=> EightBitDataFromADC,
 	dataready			=> dataready,
 	oADCSDA				=> ADC_SDA,
